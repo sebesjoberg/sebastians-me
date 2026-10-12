@@ -1,9 +1,10 @@
-import { Outlet, createRootRoute } from "@tanstack/react-router";
+import '@mantine/core/styles.css';
 
-import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
-import { TanStackDevtools } from "@tanstack/react-devtools";
-
-import "../styles.css";
+import { TanStackDevtools } from '@tanstack/react-devtools';
+import { Outlet, createRootRoute } from '@tanstack/react-router';
+import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools';
+import { MantineProvider } from '@mantine/core';
+import '../styles.css';
 
 export const Route = createRootRoute({
   component: RootComponent,
@@ -12,14 +13,16 @@ export const Route = createRootRoute({
 function RootComponent() {
   return (
     <>
-      <Outlet />
+      <MantineProvider>
+        <Outlet />
+      </MantineProvider>
       <TanStackDevtools
         config={{
-          position: "bottom-right",
+          position: 'bottom-right',
         }}
         plugins={[
           {
-            name: "TanStack Router",
+            name: 'TanStack Router',
             render: <TanStackRouterDevtoolsPanel />,
           },
         ]}

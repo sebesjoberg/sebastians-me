@@ -16,6 +16,8 @@
     "fmt:check": "oxfmt --check"
   },
   "dependencies": {
+    "@mantine/core": "^9.7.2",
+    "@mantine/hooks": "^9.7.2",
     "@tanstack/react-devtools": "0.10.13",
     "@tanstack/react-router": "1.170.42",
     "@tanstack/react-router-devtools": "1.167.2",
@@ -30,9 +32,13 @@
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
     "@vitejs/plugin-react": "^6.0.1",
+    "oxc-config-mantine": "^1.0.3",
     "oxfmt": "^0.72.0",
     "oxlint": "^1.87.0",
     "oxlint-tsgolint": "^7.0.2004",
+    "postcss": "^8.5.29",
+    "postcss-preset-mantine": "^1.18.0",
+    "postcss-simple-vars": "^7.0.1",
     "typescript": "^7.0.0",
     "vite": "^8.0.0"
   }
