@@ -1,0 +1,14 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "site_title": "Sebastian Sjöberg",
+  "site_description": "Sebastian Sjöberg's personal corner of the web.",
+  "section_hello": "Hello",
+  "section_things": "Things I have done",
+  "section_journey": "How I got here",
+  "hero_headline": "Welcome! You found my special spot. Look around.",
+  "hero_name": "Sebastian Sjöberg",
+  "hero_country": "Sweden",
+  "locale_switch_label": "Switch language",
+  "color_scheme_to_light": "Switch to light mode",
+  "color_scheme_to_dark": "Switch to dark mode"
+}

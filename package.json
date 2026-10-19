@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "vite dev --port 3000",
-    "generate-routes": "tsr generate",
+    "typecheck": "tsc --noEmit",
     "build": "vite build",
     "preview": "vite preview",
     "lint": "oxlint && stylelint \"**/*.css\"",
@@ -19,15 +19,15 @@
     "@mantine/core": "^9.7.2",
     "@mantine/hooks": "^9.7.2",
     "@tanstack/react-devtools": "0.10.13",
-    "@tanstack/react-router": "1.170.42",
+    "@tanstack/react-router": "^1.170.45",
     "@tanstack/react-router-devtools": "1.167.2",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },
   "devDependencies": {
+    "@inlang/paraglide-js": "^2.29.0",
     "@tanstack/devtools-vite": "0.8.5",
-    "@tanstack/router-cli": "^1.132.0",
-    "@tanstack/router-plugin": "1.168.43",
+    "@tanstack/router-plugin": "^1.168.47",
     "@types/node": "^22.10.2",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",

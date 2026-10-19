@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# TODO: replace with the real domain (same value as VITE_SITE_URL)
+Sitemap: https://example.com/sitemap.xml

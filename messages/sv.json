@@ -1,0 +1,14 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "site_title": "Sebastian Sjöberg",
+  "site_description": "Sebastian Sjöbergs personliga hörna på nätet.",
+  "section_hello": "Hej",
+  "section_things": "Saker jag gjort",
+  "section_journey": "Hur jag hamnade här",
+  "hero_headline": "Välkommen! Du hittade min lilla plats. Titta runt.",
+  "hero_name": "Sebastian Sjöberg",
+  "hero_country": "Sverige",
+  "locale_switch_label": "Byt språk",
+  "color_scheme_to_light": "Byt till ljust läge",
+  "color_scheme_to_dark": "Byt till mörkt läge"
+}
