@@ -9,13 +9,14 @@ import { stravaClient } from './strava.ts';
 const config = loadConfig();
 const secrets = config.openBao ? openBaoStore(config.openBao) : envStore();
 const running = runningCache(stravaClient(secrets));
-const app = createApp(running, secrets, config.staticDir);
+const app = createApp(running, secrets, config);
 
 running.start(config.refreshIntervalMs);
 
 const server = serve({ fetch: app.fetch, port: config.port }, (info) => {
   log.info('Listening', {
     port: info.port,
+    version: config.version,
     secrets: config.openBao ? 'openbao' : 'env',
   });
 });

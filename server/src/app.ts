@@ -13,13 +13,17 @@ interface StravaEvent {
   updates?: Record<string, string>;
 }
 
-function createApi(running: RunningCache, secrets: SecretStore) {
+function createApi(
+  running: RunningCache,
+  secrets: SecretStore,
+  version: string
+) {
   const api = new Hono();
 
   // Probes. Up means the process serves; Strava being down is not a reason
   // to restart it.
   api.get('/health', (c) =>
-    c.json({ ok: true, strava: running.current() !== null })
+    c.json({ ok: true, version, strava: running.current() !== null })
   );
 
   api.get('/running', (c) => {
@@ -86,10 +90,10 @@ function createApi(running: RunningCache, secrets: SecretStore) {
 export function createApp(
   running: RunningCache,
   secrets: SecretStore,
-  staticDir: string | null
+  { staticDir, version }: { staticDir: string | null; version: string }
 ) {
   const app = new Hono();
-  app.route('/api', createApi(running, secrets));
+  app.route('/api', createApi(running, secrets, version));
 
   if (staticDir) {
     // hashed file names, so they can be cached forever

@@ -26,6 +26,8 @@ export interface OpenBaoConfig {
 
 export interface Config {
   port: number;
+  /** Release version baked into the image by CI; "dev" locally. */
+  version: string;
   /** Built site to serve next to /api. null in dev, where Vite serves it. */
   staticDir: string | null;
   /** Re-fetch from Strava this often even without webhooks. */
@@ -38,6 +40,7 @@ export function loadConfig(): Config {
   const addr = process.env.BAO_ADDR;
   return {
     port: Number(optional('PORT', '8080')),
+    version: optional('APP_VERSION', 'dev'),
     staticDir: process.env.STATIC_DIR || null,
     refreshIntervalMs: Number(optional('REFRESH_INTERVAL_MIN', '360')) * 60_000,
     openBao: addr
