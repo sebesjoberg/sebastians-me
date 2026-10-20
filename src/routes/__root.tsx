@@ -9,8 +9,8 @@ import '../styles.css';
 import { getLocale } from '#/paraglide/runtime';
 import { cssVariablesResolver, theme } from '#/theme/theme';
 
-// Persists the user's choice in localStorage. Until they pick one,
-// defaultColorScheme="auto" follows the OS preference.
+// Persists the user's choice in localStorage. Until they pick one the site
+// is dark: that is the look it was designed for, light is the alternative.
 const colorSchemeManager = localStorageColorSchemeManager({
   key: 'sebastians-me-color-scheme',
 });
@@ -34,7 +34,7 @@ function RootComponent() {
       <MantineProvider
         theme={theme}
         cssVariablesResolver={cssVariablesResolver}
-        defaultColorScheme="auto"
+        defaultColorScheme="dark"
         colorSchemeManager={colorSchemeManager}
       >
         <Outlet />

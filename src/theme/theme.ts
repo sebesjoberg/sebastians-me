@@ -4,7 +4,7 @@ import {
   createTheme,
 } from '@mantine/core';
 
-// Primary accent (purple)
+// The one accent. Used only for the active item and links.
 const purpleAccent: MantineColorsTuple = [
   '#f3f0ff',
   '#e5dbff',
@@ -18,40 +18,36 @@ const purpleAccent: MantineColorsTuple = [
   '#3b1e82',
 ];
 
-// Secondary accent (teal) for details
-const tealAccent: MantineColorsTuple = [
-  '#e6fffa',
-  '#b2f5ea',
-  '#81e6d9',
-  '#4fd1c5',
-  '#319795',
-  '#2c7a7b',
-  '#234e52',
-  '#1d4044',
-  '#132b2f',
-  '#0b191b',
-];
+const fontFamily = 'Manrope, system-ui, -apple-system, "Segoe UI", sans-serif';
 
 export const theme = createTheme({
-  colors: {
-    purpleAccent,
-    tealAccent,
-  },
+  colors: { purpleAccent },
   primaryColor: 'purpleAccent',
-  primaryShade: { light: 6, dark: 3 },
+  primaryShade: { light: 7, dark: 3 },
+  fontFamily,
+  headings: { fontFamily, fontWeight: '600' },
+  defaultRadius: 'md',
+  focusRing: 'auto',
 });
 
-// Overrides body, text and link colors per color scheme.
+// Slate paper and ink in light, deep blue-black ground in dark. The light
+// ground is deliberately a shade darker than "white page": a toned paper the
+// accent wash and the pictures sit on, not a blank sheet. Dimmed text is a
+// steel grey, not a tint of the accent, so the accent stays meaningful.
 export const cssVariablesResolver: CSSVariablesResolver = () => ({
   variables: {},
   light: {
-    '--mantine-color-body': '#f5f7fb',
-    '--mantine-color-text': '#0d0f2b',
-    '--mantine-color-anchor': '#7048e8',
+    '--mantine-color-body': '#dfe4ea',
+    '--mantine-color-text': '#101922',
+    '--mantine-color-dimmed': '#5c6978',
+    '--mantine-color-default-border': '#b9c2cc',
+    '--mantine-color-anchor': '#5f3dc4',
   },
   dark: {
-    '--mantine-color-body': '#0d0e29',
-    '--mantine-color-text': '#ffffff',
+    '--mantine-color-body': '#0e161e',
+    '--mantine-color-default-border': '#273340',
+    '--mantine-color-text': '#e8ecf0',
+    '--mantine-color-dimmed': '#8a96a3',
     '--mantine-color-anchor': '#b197fc',
   },
 });

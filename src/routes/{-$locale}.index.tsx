@@ -1,34 +1,43 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { Anchor, Container, Group, Stack, Text, Title } from '@mantine/core';
 import { ColorSchemeToggle } from '#/components/ColorSchemeToggle';
 import { LocaleSwitch } from '#/components/LocaleSwitch';
-import { sections } from '#/content/sections';
-import { m } from '#/paraglide/messages';
+import { ScrollShell } from '#/components/scroll/ScrollShell';
+import { Section } from '#/components/scroll/Section';
+import { Facts } from '#/components/sections/Facts';
+import { Hero } from '#/components/sections/Hero';
+import { Timeline } from '#/components/sections/Timeline';
+import { type SectionDef, sections } from '#/content/sections';
+import { timeline } from '#/content/timeline';
 
 export const Route = createFileRoute('/{-$locale}/')({ component: Home });
 
-// Placeholder until the scroll shell is built. It only proves that routing,
-// locale, messages and the section data all line up.
+function SectionBody({ section }: { section: SectionDef }) {
+  switch (section.kind) {
+    case 'hero':
+      return <Hero />;
+    case 'facts':
+      return <Facts items={section.items} />;
+    case 'timeline':
+      return <Timeline entries={timeline} />;
+  }
+}
+
 function Home() {
   return (
-    <Container size="xl" py="xl">
-      <Group justify="flex-end" mb="xl">
-        <LocaleSwitch />
-        <ColorSchemeToggle />
-      </Group>
-      <Stack gap="sm">
-        <Title order={1}>{m.hero_headline()}</Title>
-        <Text size="lg" c="dimmed">
-          {m.hero_name()} · {m.hero_country()}
-        </Text>
-      </Stack>
-      <Stack gap="xs" mt="xl" component="nav">
-        {sections.map((section) => (
-          <Anchor key={section.id} href={`#${section.id}`}>
-            {section.title()}
-          </Anchor>
-        ))}
-      </Stack>
-    </Container>
+    <ScrollShell
+      sections={sections}
+      controls={
+        <>
+          <LocaleSwitch />
+          <ColorSchemeToggle />
+        </>
+      }
+    >
+      {sections.map((section) => (
+        <Section key={section.id} section={section}>
+          <SectionBody section={section} />
+        </Section>
+      ))}
+    </ScrollShell>
   );
 }

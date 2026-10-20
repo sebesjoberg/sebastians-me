@@ -37,9 +37,6 @@ const config = defineConfig({
     tanstackRouter({ target: 'react', autoCodeSplitting: true }),
     viteReact(),
   ],
-  css: {
-    postcss: {},
-  },
 });
 
 export default config;

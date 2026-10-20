@@ -8,6 +8,79 @@ body,
   min-height: 100%;
 }
 
+html {
+  scroll-behavior: smooth;
+
+  /* always settle on a section start or an item slot, never in between */
+  scroll-snap-type: y mandatory;
+
+  /* the page always sits on exactly one item; the scrollbar only adds noise */
+  scrollbar-width: none;
+
+  @media (prefers-reduced-motion: reduce) {
+    scroll-behavior: auto;
+  }
+}
+
+html::-webkit-scrollbar {
+  display: none;
+}
+
 body {
   margin: 0;
+  font-feature-settings: 'tnum';
+  -webkit-font-smoothing: antialiased;
+
+  /* two quiet washes of the accent, one in the top right and a fainter
+     one low on the left, so the ground has some depth instead of being one
+     flat sheet */
+  background:
+    fixed
+      radial-gradient(
+        ellipse 60% 50% at 85% 5%,
+        light-dark(
+            color-mix(
+              in srgb,
+              var(--mantine-color-purpleAccent-3) 55%,
+              transparent
+            ),
+            color-mix(
+              in srgb,
+              var(--mantine-color-purpleAccent-9) 70%,
+              transparent
+            )
+          )
+          0%,
+        transparent 100%
+      ),
+    fixed
+      radial-gradient(
+        ellipse 50% 40% at 10% 100%,
+        light-dark(
+            color-mix(
+              in srgb,
+              var(--mantine-color-purpleAccent-2) 45%,
+              transparent
+            ),
+            color-mix(
+              in srgb,
+              var(--mantine-color-purpleAccent-9) 35%,
+              transparent
+            )
+          )
+          0%,
+        transparent 100%
+      ),
+    var(--mantine-color-body);
+}
+
+/* one switch for every transition and animation on the page */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+  }
 }

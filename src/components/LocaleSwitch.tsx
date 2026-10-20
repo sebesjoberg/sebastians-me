@@ -12,18 +12,24 @@ export function LocaleSwitch() {
   const { pathname } = useLocation();
 
   return (
-    <Group gap="xs" component="nav" aria-label={m.locale_switch_label()}>
-      {locales.map((locale) => (
-        <Anchor
-          key={locale}
-          href={localizeHref(pathname, { locale })}
-          hrefLang={locale}
-          fw={locale === current ? 700 : 400}
-          aria-current={locale === current ? 'page' : undefined}
-        >
-          {labels[locale] ?? locale}
-        </Anchor>
-      ))}
+    <Group gap="sm" component="nav" aria-label={m.locale_switch_label()}>
+      {locales.map((locale) => {
+        const isCurrent = locale === current;
+        return (
+          <Anchor
+            key={locale}
+            href={localizeHref(pathname, { locale })}
+            hrefLang={locale}
+            size="sm"
+            underline="never"
+            fw={isCurrent ? 600 : 400}
+            c={isCurrent ? undefined : 'dimmed'}
+            aria-current={isCurrent ? 'page' : undefined}
+          >
+            {labels[locale] ?? locale}
+          </Anchor>
+        );
+      })}
     </Group>
   );
 }
