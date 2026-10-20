@@ -1,0 +1,9 @@
+.git
+.github
+.env
+**/.env
+node_modules
+server/node_modules
+dist
+src/paraglide
+src/routeTree.gen.ts

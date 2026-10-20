@@ -4,7 +4,14 @@ import { m } from '#/paraglide/messages';
 // Same placeholder everywhere until there are real photos.
 export const placeholderImage = '/placeholder.svg';
 
-export type SectionKind = 'hero' | 'facts' | 'timeline';
+export type SectionKind =
+  | 'hero'
+  | 'now'
+  | 'facts'
+  | 'numbers'
+  | 'runs'
+  | 'timeline'
+  | 'contact';
 
 export interface SectionItem {
   /** Scroll target id. */
@@ -25,8 +32,6 @@ export interface SectionDef {
 }
 
 export const facts: SectionItem[] = [
-  { id: 'marathon', title: m.fact_marathon, image: placeholderImage },
-  { id: 'lidingo', title: m.fact_lidingo, image: placeholderImage },
   { id: 'discgolf', title: m.fact_discgolf, image: placeholderImage },
   { id: 'f1', title: m.fact_f1, image: placeholderImage },
   { id: 'hiking', title: m.fact_hiking, image: placeholderImage },
@@ -42,11 +47,15 @@ export const sections: SectionDef[] = [
     title: m.section_hello,
     items: [],
   },
+  { id: 'now', kind: 'now', title: m.section_now, items: [] },
   { id: 'things', kind: 'facts', title: m.section_things, items: facts },
+  { id: 'numbers', kind: 'numbers', title: m.section_numbers, items: [] },
+  { id: 'runs', kind: 'runs', title: m.section_runs, items: [] },
   {
     id: 'journey',
     kind: 'timeline',
     title: m.section_journey,
     items: timeline.map(({ id, title, image }) => ({ id, title, image })),
   },
+  { id: 'contact', kind: 'contact', title: m.section_contact, items: [] },
 ];

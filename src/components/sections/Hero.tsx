@@ -1,5 +1,41 @@
-import { Avatar, Stack, Text } from '@mantine/core';
+import { Anchor, Avatar, Group, Stack, Text } from '@mantine/core';
+import { jumpOnClick } from '../scroll/jump';
 import { m } from '#/paraglide/messages';
+
+// The hero shrunk to a corner badge, shown while you are in the other
+// sections. Clicking it goes back to the top.
+export function HeroBadge() {
+  return (
+    <Anchor
+      href="#hello"
+      onClick={jumpOnClick('hello')}
+      underline="never"
+      c="inherit"
+    >
+      <Group gap="sm" wrap="nowrap">
+        <Avatar
+          src="/me.jpg"
+          alt=""
+          size={36}
+          radius="50%"
+          color="gray"
+          variant="light"
+          fz="xs"
+        >
+          SS
+        </Avatar>
+        <Stack gap={0}>
+          <Text fz="sm" fw={600} lh={1.2}>
+            {m.hero_name()}
+          </Text>
+          <Text fz="xs" c="dimmed" lh={1.2}>
+            {m.hero_country()}
+          </Text>
+        </Stack>
+      </Group>
+    </Anchor>
+  );
+}
 
 // The headline is the hero. Drop a photo at public/me.jpg; until then the
 // initials show in a neutral circle.

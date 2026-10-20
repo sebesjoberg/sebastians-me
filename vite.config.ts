@@ -5,7 +5,12 @@ import viteReact from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 
 const config = defineConfig({
-  server: { port: 3000 },
+  server: {
+    port: 3000,
+    // the API runs on its own in dev (npm run dev in server/); in production
+    // one server serves both the site and /api
+    proxy: { '/api': 'http://localhost:8080' },
+  },
   resolve: { tsconfigPaths: true },
   plugins: [
     devtools(),

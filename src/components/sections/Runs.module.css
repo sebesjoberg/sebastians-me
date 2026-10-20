@@ -1,0 +1,109 @@
+/* phones: a strip of cards that snaps sideways; from md: all five in a row */
+.list {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: min(72vw, rem(260px));
+  gap: var(--mantine-spacing-md);
+  width: 100%;
+  max-width: rem(1200px);
+  margin: 0;
+  padding: 0 0 var(--mantine-spacing-xs);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  list-style: none;
+
+  @media (min-width: $mantine-breakpoint-md) {
+    grid-auto-flow: row;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    overflow: visible;
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mantine-spacing-sm);
+  padding: var(--mantine-spacing-lg);
+  border: 1px solid var(--mantine-color-default-border);
+  border-radius: var(--mantine-radius-lg);
+  background: color-mix(in srgb, var(--mantine-color-body) 75%, transparent);
+  scroll-snap-align: center;
+
+  /* the newest run leads, in the accent */
+  &:first-child {
+    border-color: color-mix(
+      in srgb,
+      var(--mantine-primary-color-filled) 50%,
+      transparent
+    );
+    background: color-mix(
+      in srgb,
+      var(--mantine-primary-color-filled) 10%,
+      var(--mantine-color-body)
+    );
+  }
+}
+
+.route {
+  width: 100%;
+  max-height: rem(150px);
+  aspect-ratio: 1;
+  margin-bottom: var(--mantine-spacing-xs);
+
+  & polyline,
+  & line {
+    fill: none;
+    stroke: var(--mantine-primary-color-filled);
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    vector-effect: non-scaling-stroke;
+  }
+}
+
+.distance {
+  margin: 0;
+  font-size: clamp(rem(36px), 4vw, rem(44px));
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.unit {
+  margin-left: 0.15em;
+  font-size: 0.45em;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.figures {
+  display: grid;
+  gap: rem(6px);
+  margin: 0 0 var(--mantine-spacing-xs);
+
+  & > div {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--mantine-spacing-sm);
+  }
+
+  & dt {
+    display: flex;
+    align-items: center;
+    gap: rem(6px);
+    font-size: var(--mantine-font-size-sm);
+    color: var(--mantine-color-dimmed);
+  }
+
+  & dt svg {
+    width: rem(16px);
+    height: rem(16px);
+  }
+
+  & dd {
+    margin: 0;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+}

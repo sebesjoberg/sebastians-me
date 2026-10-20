@@ -3,6 +3,9 @@ export default {
   extends: ['stylelint-config-standard'],
   ignoreFiles: ['**/node_modules/**', '**/dist/**'],
   rules: {
+    // postcss-simple-vars fills in $mantine-breakpoint-* before the browser
+    // sees it, which stylelint cannot know.
+    'media-query-no-invalid': null,
     // Mantine's theme variables use the color key verbatim (e.g. purpleAccent),
     // so allow any --mantine-* name; everything else stays kebab-case.
     'custom-property-pattern': [

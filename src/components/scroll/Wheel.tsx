@@ -21,7 +21,7 @@ const ease = 'cubic-bezier(0.2, 0.8, 0.2, 1)';
 // cells only ever use the two known sizes, the translation is plain
 // arithmetic and the whole thing animates with a single transform.
 //
-// Cells fade and soften with distance from the active one, and each cell's
+// Cells fade with distance from the active one, and each cell's
 // transition is delayed a little by that distance, so a change ripples
 // outwards from the middle instead of everything moving at once.
 //
@@ -79,12 +79,9 @@ export function Wheel<T>({
               flex: 'none',
               alignItems: 'center',
               justifyContent: 'center',
-              opacity: isActive ? 1 : Math.max(0.15, 0.7 - distance * 0.15),
-              filter:
-                distance > 1
-                  ? `blur(${Math.min(distance - 1, 3) * 0.6}px)`
-                  : 'none',
-              transition: `${isX ? 'width' : 'height'} 600ms ${ease}, opacity 500ms ${ease}, filter 500ms ${ease}`,
+              // no blur: it made the neighbours hard to read for little gain
+              opacity: isActive ? 1 : Math.max(0.3, 0.85 - distance * 0.15),
+              transition: `${isX ? 'width' : 'height'} 600ms ${ease}, opacity 500ms ${ease}`,
               transitionDelay: `${Math.min(distance, 4) * 40}ms`,
             }}
           >

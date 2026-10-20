@@ -14,8 +14,8 @@ export function Facts({ items }: { items: SectionItem[] }) {
       items={items}
       activeId={activeItemId}
       getId={(item) => item.id}
-      smallSize="2.75rem"
-      bigSize="26rem"
+      smallSize="3rem"
+      bigSize="24rem"
       render={(item, isActive) => (
         <Stack align="center" gap="lg">
           {item.image ? (
@@ -23,16 +23,19 @@ export function Facts({ items }: { items: SectionItem[] }) {
               <ItemImage src={item.image} height="11rem" />
             </Collapse>
           ) : null}
+          {/* the active line stays short enough to read in one glance; the
+              waiting ones are full-size body text, not fine print */}
           <Text
             component="p"
             m={0}
-            maw={960}
-            fz={isActive ? 'clamp(2.5rem, 6vw, 5rem)' : '1rem'}
+            maw={isActive ? '18ch' : 'none'}
+            fz={isActive ? 'clamp(2rem, 4.5vw, 3.5rem)' : '1.125rem'}
             fw={isActive ? 700 : 500}
-            lh={1.05}
-            lts={isActive ? '-0.03em' : 0}
+            lh={1.1}
+            lts={isActive ? '-0.02em' : 0}
             c={isActive ? undefined : 'dimmed'}
             style={{
+              textWrap: 'balance',
               transition:
                 'font-size 500ms cubic-bezier(0.2, 0.8, 0.2, 1), letter-spacing 500ms cubic-bezier(0.2, 0.8, 0.2, 1), color 300ms ease',
             }}

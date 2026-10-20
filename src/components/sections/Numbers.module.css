@@ -1,0 +1,151 @@
+/* Phones: two columns, lead across the top. From sm: six columns, lead 4x2
+   with the two small cards stacked beside it, race cards half each. */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-auto-rows: minmax(rem(124px), auto);
+  gap: var(--mantine-spacing-sm);
+
+  @media (min-width: $mantine-breakpoint-sm) {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-auto-rows: minmax(rem(150px), auto);
+    gap: var(--mantine-spacing-md);
+  }
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--mantine-spacing-md);
+  padding: var(--mantine-spacing-lg);
+  overflow: hidden;
+  border: 1px solid var(--mantine-color-default-border);
+  border-radius: var(--mantine-radius-lg);
+  background: color-mix(in srgb, var(--mantine-color-body) 75%, transparent);
+
+  @media (min-width: $mantine-breakpoint-sm) {
+    padding: var(--mantine-spacing-xl);
+  }
+
+  &[data-size='lead'] {
+    grid-column: 1 / -1;
+    border-color: color-mix(
+      in srgb,
+      var(--mantine-primary-color-filled) 50%,
+      transparent
+    );
+    background:
+      radial-gradient(
+        circle at 85% 15%,
+        color-mix(
+          in srgb,
+          var(--mantine-primary-color-filled) 30%,
+          transparent
+        ),
+        transparent 60%
+      ),
+      color-mix(
+        in srgb,
+        var(--mantine-primary-color-filled) 10%,
+        var(--mantine-color-body)
+      );
+
+    @media (min-width: $mantine-breakpoint-sm) {
+      grid-column: span 4;
+      grid-row: span 2;
+    }
+  }
+
+  &[data-size='small'] {
+    @media (min-width: $mantine-breakpoint-sm) {
+      grid-column: span 2;
+    }
+  }
+
+  &[data-size='photo'] {
+    min-height: rem(160px);
+    border-color: transparent;
+    color: var(--mantine-color-white);
+
+    @media (min-width: $mantine-breakpoint-sm) {
+      grid-column: span 3;
+      min-height: rem(200px);
+    }
+  }
+}
+
+/* the photo fills the card, darkened towards the bottom so the white text
+   stays readable on any picture */
+.photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.card[data-size='photo']::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(to top, rgb(0 0 0 / 75%), rgb(0 0 0 / 15%) 70%);
+}
+
+.icon,
+.body {
+  position: relative;
+  z-index: 1;
+}
+
+.icon {
+  width: rem(28px);
+  height: rem(28px);
+  color: var(--mantine-primary-color-filled);
+
+  .card[data-size='lead'] & {
+    width: rem(44px);
+    height: rem(44px);
+  }
+
+  .card[data-size='photo'] & {
+    color: var(--mantine-color-white);
+  }
+}
+
+.value {
+  margin: 0;
+  font-size: clamp(rem(36px), 5vw, rem(56px));
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.03em;
+
+  .card[data-size='lead'] & {
+    font-size: clamp(rem(72px), 13vw, rem(150px));
+    color: var(--mantine-primary-color-filled);
+  }
+}
+
+.unit {
+  margin-left: 0.15em;
+  font-size: 0.4em;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.label {
+  margin: var(--mantine-spacing-xs) 0 0;
+  font-weight: 500;
+  color: var(--mantine-color-dimmed);
+
+  .card[data-size='lead'] & {
+    font-size: var(--mantine-font-size-lg);
+  }
+
+  .card[data-size='photo'] & {
+    color: rgb(255 255 255 / 85%);
+  }
+}

@@ -5,6 +5,8 @@ import type { SectionDef } from '#/content/sections';
 
 interface SectionProps {
   section: SectionDef;
+  /** Position on the page; shown as "01", "02"... The hero (0) has no header. */
+  index: number;
   children: ReactNode;
 }
 
@@ -26,10 +28,12 @@ const SLOT_HEIGHT = 1;
 // The stage fades and rises in when its section becomes the active one, and
 // sinks away when it stops being active, so moving between sections reads as
 // a scene change rather than a hard scroll.
-export function Section({ section, children }: SectionProps) {
+export function Section({ section, index, children }: SectionProps) {
   const { activeSectionId } = useScrollState();
   const isActive = activeSectionId === null || activeSectionId === section.id;
   const titleId = `${section.id}-title`;
+  // The hero's headline already says what it is; a header on top is noise.
+  const hasHeader = index > 0;
   const slots = section.items.length > 0 ? section.items : [{ id: section.id }];
 
   return (
@@ -37,7 +41,7 @@ export function Section({ section, children }: SectionProps) {
       component="section"
       id={section.id}
       data-section-id={section.id}
-      aria-labelledby={titleId}
+      aria-labelledby={hasHeader ? titleId : undefined}
       pos="relative"
       h={`${slots.length * SLOT_HEIGHT * 100}dvh`}
     >
@@ -62,21 +66,38 @@ export function Section({ section, children }: SectionProps) {
         display="flex"
         style={{ flexDirection: 'column' }}
       >
-        <Box
-          component="header"
-          px="xl"
-          pt={40}
-          ta="center"
-          style={{
-            opacity: isActive ? 1 : 0,
-            transform: isActive ? 'none' : 'translateY(-8px)',
-            transition: `opacity 500ms ${ease}, transform 500ms ${ease}`,
-          }}
-        >
-          <Text component="h2" id={titleId} m={0} fz="md" fw={500} c="dimmed">
-            {section.title()}
-          </Text>
-        </Box>
+        {/* number and title on one line, low enough to clear the fixed bar
+            with the badge and controls */}
+        {hasHeader ? (
+          <Box
+            component="header"
+            px="xl"
+            pt={84}
+            display="flex"
+            style={{
+              justifyContent: 'center',
+              alignItems: 'baseline',
+              gap: 'var(--mantine-spacing-sm)',
+              opacity: isActive ? 1 : 0,
+              transform: isActive ? 'none' : 'translateY(-8px)',
+              transition: `opacity 500ms ${ease}, transform 500ms ${ease}`,
+            }}
+          >
+            <Text aria-hidden fz="sm" fw={700} c="purpleAccent" lts="0.08em">
+              {String(index).padStart(2, '0')}
+            </Text>
+            <Text
+              component="h2"
+              id={titleId}
+              m={0}
+              fz="clamp(1.25rem, 2.4vw, 1.625rem)"
+              fw={700}
+              lts="-0.01em"
+            >
+              {section.title()}
+            </Text>
+          </Box>
+        ) : null}
         <Box
           pos="relative"
           px="xl"
